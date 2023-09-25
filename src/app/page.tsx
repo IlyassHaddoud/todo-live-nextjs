@@ -4,7 +4,6 @@ import Todo from "./components/Todo";
 
 const Home = async () => {
   const todos = await prisma.todo.findMany();
-
   const check = async (id: string, checked: boolean) => {
     "use server";
     await prisma.todo.update({
@@ -12,6 +11,7 @@ const Home = async () => {
       where: { id },
     });
   };
+
   return (
     <div className="home">
       <header className="flex justify-between items-center mb-14">
@@ -28,5 +28,7 @@ const Home = async () => {
     </div>
   );
 };
+
+export const dynamic = "force-dynamic";
 
 export default Home;
