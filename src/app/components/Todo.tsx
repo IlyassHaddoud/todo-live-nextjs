@@ -5,11 +5,12 @@ type todoProps = {
   title: string;
   checked: boolean;
   check: (id: string, checked: boolean) => void;
+  remove: (id: string) => void;
 };
 
-const Todo = ({ id, title, checked, check }: todoProps) => {
+const Todo = ({ id, title, checked, check, remove }: todoProps) => {
   return (
-    <div className="todo">
+    <div className="todo flex justify-between items-center">
       <div className="flex gap-3  ml-3 my-4">
         <input
           id={id}
@@ -25,6 +26,12 @@ const Todo = ({ id, title, checked, check }: todoProps) => {
           {title}
         </label>
       </div>
+      <button
+        onClick={() => remove(id)}
+        className="border border-slate-400 rounded px-3 py-1 hover:bg-slate-600"
+      >
+        Delete
+      </button>
     </div>
   );
 };
