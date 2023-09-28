@@ -1,7 +1,7 @@
 import Link from "next/link";
 import prisma from "@/database";
 import Todo from "./components/Todo";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 
 const Home = async () => {
   const todos = await prisma.todo.findMany();
@@ -11,12 +11,12 @@ const Home = async () => {
       data: { checked: checked },
       where: { id },
     });
-    return redirect("/");
   };
 
   const remove = async (id: string) => {
     "use server";
     await prisma.todo.delete({ where: { id } });
+    redirect("/");
   };
 
   return (
